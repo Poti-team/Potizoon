@@ -1,0 +1,115 @@
+
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+body{
+    margin: 0;
+    padding: 0;
+    
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+}
+
+.resetar-localizacao {
+    position: absolute;
+    z-index: 1001;
+    top: 50vh;
+    right: 1vh;
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #243664;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border: none;
+}
+
+.resetar-localizacao:active {
+    background-color: #121636;
+}
+
+.search-container {                                        
+    position: absolute;
+    display: flex;
+    top: 1vh;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: white;
+    border-radius: 15em;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.search-container input {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    margin-left: 2vw;
+    width: 100%;
+    border-radius: inherit;
+}
+
+.icone-bussola-container { 
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #EDEDED;
+    z-index: 2000;
+    flex-direction: column;
+}
+
+.overlay-header {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    padding: 1vh;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.overlay-header input {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    width: 100%;
+    margin-left: 1vw;
+    border-radius: 0;
+}
+
+.overlay-content {
+    margin-top: 2vh;
+    width: inherit;
+}
+
+.option, .recent {
+    display: flex;
+    align-items: center;
+    padding: 1vh;
+}
+
+.option img, .recent img {
+    margin-right: 1vw;
+}
+
+.recent {
+    background-color: #C5C5C5;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
