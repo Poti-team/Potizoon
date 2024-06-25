@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
-import { useRouter } from 'next/router';
 
 function LoginPage() {
-  const router = useRouter();
 
   const handleGoogleLogin = async () => {
     try {
