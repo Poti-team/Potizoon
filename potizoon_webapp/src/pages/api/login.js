@@ -10,10 +10,21 @@ function LoginPage() {
     try {
       const provider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, provider);
-      console.log('Usuário autenticado:', user);
 
-      // Redirecionar para página principal após login bem-sucedido
-      router.push('/');
+      const response = await fetch('/api/getUser', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        console.log('Dados do usuário:', userData);
+        
+      } else {
+        console.error('Erro ao obter dados do usuário:', response.status);
+      }
     } catch (error) {
       console.error('Erro ao fazer login com Google:', error);
     }
