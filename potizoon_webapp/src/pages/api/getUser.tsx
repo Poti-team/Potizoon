@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const serviceAccount = require('../../../serviceAccountKey.json'); // Caminho para o arquivo de credenciais
+const serviceAccount = require('../../../firebaseConfig.js'); // Caminho para o arquivo de credenciais
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
