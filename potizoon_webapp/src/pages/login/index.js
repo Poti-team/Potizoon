@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
 import { useRouter } from 'next/router';
@@ -19,10 +19,13 @@ function LoginPage() {
     }
   };
 
+  useEffect(() => {
+    handleGoogleLogin();
+  }, []);
+
   return (
     <div className="login-container">
-      <h1>Login com Google</h1>
-      <button onClick={handleGoogleLogin}>Fazer Login com Google</button>
+      <h1>Espero que o popup tenha aparecido!</h1>
     </div>
   );
 }
