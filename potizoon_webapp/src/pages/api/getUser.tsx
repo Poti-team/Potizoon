@@ -1,5 +1,4 @@
 import * as admin from 'firebase-admin';
-import { App } from 'firebase-admin/app';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const serviceAccount = require('../../../firebaseConfig.js'); // Caminho para o arquivo de credenciais
@@ -8,7 +7,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse, app: App) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse, app: admin.app.App) {
   const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
