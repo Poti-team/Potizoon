@@ -10,7 +10,7 @@ function getUser() {
     });
 
   async function handler(req: NextApiRequest, res: NextApiResponse) {
-      const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken');
   
     if (!token) {
         res.status(401).json({ message: 'Unauthorized' });
