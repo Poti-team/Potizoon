@@ -1,38 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
 import { useRouter } from 'next/router';
 
 function LoginPage() {
+  // react hook useState sendo utilizado
+  const [loginInfo, setLoginInfo] = useState(null);
+  const [error, setError] = useState(null);
+
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      const { user } = await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
 
-      console.log('Usuário autenticado:', user);
+      const { user, credential, operationType } = userCredential;
+
+      // Assuming you have an API endpoint to handle login information
       const response = await fetch('/api/getUser', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',  },
+        body: JSON.stringify(loginInfo),
       });
-    
-      if (response.ok) {
-        const userData = await response.json();
-        console.log('Dados do usuário:', userData);
-    
-        // Enviar dados do usuário para o Mit App Inventor
-        // (Utilize a função `WebViewString` para enviar os dados)
-      } else {
-        console.error('Erro ao obter dados do usuário:', response.status);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      else {
+        const data = await response.json();
+        setLoginInfo({ user, credential, operationType });
+        localStorage.setItem('authToken', data.token);
+
       }
 
-      // Redirecionar para página principal após login bem-sucedido
+      // Handle successful login (optional, e.g., redirect to home page)
       router.push('/');
     } catch (error) {
-      console.error('Erro ao fazer login com Google:', error);
+      console.error('Erro:', error);
+      setError(error);
     }
   };
 
@@ -42,7 +48,11 @@ function LoginPage() {
 
   return (
     <div className="login-container">
-      <h1>Espero que o popup tenha aparecido!</h1>
+      {error ? (
+        <div className="error-message">{error.message}</div>
+      ) : (
+        <h1>Login com Google</h1>
+      )}
     </div>
   );
 }
