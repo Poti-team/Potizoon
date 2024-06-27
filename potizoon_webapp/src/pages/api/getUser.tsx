@@ -38,7 +38,7 @@ function getUser() {
     } catch (error) {
       console.log("The error is being catched heere")
       console.error('Erro ao verificar token:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+    
     }
   }
 }
