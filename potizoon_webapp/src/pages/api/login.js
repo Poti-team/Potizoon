@@ -18,7 +18,7 @@ function LoginPage() {
       const { user, credential, operationType } = userCredential;
 
       // Assuming you have an API endpoint to handle login information
-      console.log("login antes response")
+      console.log("before defining response")
       const response = await fetch('/api/getUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',  },
@@ -46,6 +46,7 @@ function LoginPage() {
   };
 
   useEffect(() => {
+    console.log("Antes de executar função handle login google")
     handleGoogleLogin();
   }, []);
 

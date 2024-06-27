@@ -20,22 +20,25 @@ function getUser() {
       }
   
     try {
-      console.log("try start")
-      // linha ligada ao firebase auth
-      const decodedToken = await admin.auth(app).verifyIdToken(token);
-      console.log("aftertoken")
-      const user = {
-        uid: decodedToken.uid,
-        displayName: decodedToken.displayName,
-        email: decodedToken.email,
-      };
       
-      console.log("oii")
-      res.status(200).json(user);
-      console.log("Status 200 ")
+      console.log("try start")
+    
+      await admin.auth(app).verifyIdToken(token).then((decodedToken) => {
+        const user = {
+          uid: decodedToken.uid,
+          displayName: decodedToken.displayName,
+          email: decodedToken.email,
+        };
+
+        console.log("oii")
+        res.status(200).json(user);
+        console.log("Status 200 ")
+      })
+      
+     
 
     } catch (error) {
-      console.log("Problema no token")
+      console.log("The error is being catched heere")
       console.error('Erro ao verificar token:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
