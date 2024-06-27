@@ -18,6 +18,7 @@ function LoginPage() {
       const { user, credential, operationType } = userCredential;
 
       // Assuming you have an API endpoint to handle login information
+      console.log("login antes response")
       const response = await fetch('/api/getUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',  },
@@ -25,9 +26,11 @@ function LoginPage() {
       });
 
       if (!response.ok) {
+        console.log("response not ok")
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       else {
+        console.log("response ok")
         const data = await response.json();
         setLoginInfo({ user, credential, operationType });
         localStorage.setItem('authToken', data.token);
