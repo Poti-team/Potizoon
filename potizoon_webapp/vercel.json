@@ -1,6 +1,6 @@
 {
     "functions": {
-      "api/user.ts": {
+      "pages/api/user.ts": {
         "maxDuration": 30
       }
     }
