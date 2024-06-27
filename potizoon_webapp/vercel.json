@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "api/user.ts": {
+        "maxDuration": 30
+      }
+    }
+  }
