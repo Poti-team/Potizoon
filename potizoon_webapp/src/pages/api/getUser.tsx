@@ -30,7 +30,7 @@ function getUser() {
 
     } catch (error) {
       console.error('Erro ao verificar token:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+      // res.status(500).json({ message: 'Internal Server Error' });
     }
   }
 }
