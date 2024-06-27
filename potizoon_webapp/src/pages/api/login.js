@@ -17,25 +17,24 @@ function LoginPage() {
 
       const { user, credential, operationType } = userCredential;
 
+      // ... (logic to construct loginInfo object)
+
       // Assuming you have an API endpoint to handle login information
-      console.log("before defining response")
+      console.log("before defining response");
       const response = await fetch('/api/getUser', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json',  },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginInfo),
       });
 
       if (!response.ok) {
-        console.log("response not ok")
-        throw new Error(`HTTP error! status: ${response.status}`);
+        console.log("response not ok");
+        throw new Error(`API error! status: ${response.status}`); // More specific error message
       }
-      else {
-        console.log("response ok")
-        const data = await response.json();
-        setLoginInfo({ user, credential, operationType });
-        localStorage.setItem('authToken', data.token);
 
-      }
+      const data = await response.json();
+      setLoginInfo({ user, credential, operationType });
+      localStorage.setItem('authToken', data.token);
 
       // Handle successful login (optional, e.g., redirect to home page)
       router.push('/');
@@ -44,6 +43,9 @@ function LoginPage() {
       setError(error);
     }
   };
+
+  // ... (rest of the code)
+
 
   useEffect(() => {
     console.log("Antes de executar função handle login google")
