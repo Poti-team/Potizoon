@@ -1,13 +1,11 @@
 import * as admin from 'firebase-admin';
-import app from '../../../firebaseConfig'
+import  app  from '../../../firebaseConfig'
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const serviceAccount = require('../../../firebaseConfig.js'); // Caminho para o arquivo de credenciais
 
 function getUser() {
-  admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-    });
+
 
   async function handler(req: NextApiRequest, res: NextApiResponse) {
     const token = localStorage.getItem('authToken');
