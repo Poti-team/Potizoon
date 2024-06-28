@@ -1,53 +1,42 @@
 import React, { useEffect } from 'react';
 
-import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth';
 
 // objeto obtido da funcao getAuth(app)
 import { auth } from '../../firebaseConfig.js';
-import { useRouter } from 'next/router';
+
+function tellAppInventor(message) {
+  try {
+      window.AppInventor.setWebViewString( message );
+  } catch(e) {
+      console.log("App Inventor Communication Error",e)
+  }
+}
 
 function LoginPage() {
-  const router = useRouter();
 
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
       signInWithRedirect(auth, provider)
-      
-      getRedirectResult(auth) //função que retorna estrutura contendo user, operationType, credential "and any additional user information that was returned from the identity provider. "
-
-      .then((user) => {
-            // // Prepare user data to be sent
-          const userData = {
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            // Add other user properties you need to send
+      getRedirectResult(auth) 
+      .then((result) => {
+          const result_dict = {
+            "credential": provider.credentialFromResult(result),
+            "token": this.credential.acessToken,
+            "user": result.user,
+            "operationType": result.operationType,
           };
-
-          // Send user data to server
-          fetch('/api/user', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-          });
-
-          router.push("/")
-
-        //quero mandar user, credential e operationType como resposta http após login efetuado com sucesso
+          tellAppInventor(result_dict)
       })
      
     } catch (error) {
-
-      const email = error.email;
-      const credential = error.credential;
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage, email, credential)
-       
-        
+      const error_dict = {
+        "email": error.email,
+        "credential": error.credential,
+        "errorCode": error.code,
+        "errorMessage": error.message}
+      tellAppInventor(error_dict)
     }
   };
 
