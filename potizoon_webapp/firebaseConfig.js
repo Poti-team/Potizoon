@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth"
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_apiKey,
-  authDomain: process.NEXT_PUBLIC_env.authDomain,
+  authDomain: process.env.NEXT_PUBLIC_authDomain,
   databaseURL: process.env.NEXT_PUBLIC_databaseURL,
   projectId: process.env.NEXT_PUBLIC_projectId,
   storageBucket: process.env.NEXT_PUBLIC_storageBucket,
