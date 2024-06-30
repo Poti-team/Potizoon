@@ -15,22 +15,7 @@ export const viewport: Viewport = {
   userScalable: false,
 }
 
-export default function Template({ children }: { children: React.ReactNode }) {
-  const signIn = () => {
-    useEffect(() => {
-        signInWithGoogleRedirect();
-        const handleSignIn = async () => {
-          const result = await getRedirectResult(auth);
-          console.log(result);
-        };
-        handleSignIn();
-    }, []);
-  
-  }
-
-  signIn();
-  
-   
+export default function Template({ children }: { children: React.ReactNode }) {   
 
   function tellAppInventor(message: String | Object) {
     try {
@@ -41,9 +26,22 @@ export default function Template({ children }: { children: React.ReactNode }) {
     }
   }
 
+  function GoogleLogin() {
+    signInWithGoogleRedirect();
+  
+    useEffect(() => {
+      async function fetchRedirectResult() {
+        const response = await getRedirectResult(auth);
+        console.log("Response", response);
+      }
+      fetchRedirectResult();
+    }, []);
+  }
+
   return (
     <div className="login-container">
       <h1>Você está sendo redirecionado para o login</h1>
+      <button onClick={GoogleLogin}>Socorro</button>
       {children}
     </div>
   );

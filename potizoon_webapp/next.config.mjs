@@ -4,7 +4,7 @@ const nextConfig = {
         return [
         {
             source: '/__/auth/:path*',
-            destination: 'https://<project>.firebaseapp.com/__/auth/:path*',
+            destination: 'https://potizoon.firebaseapp.com/__/auth/:path*',
         },
         ]
     },
