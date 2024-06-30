@@ -1,28 +1,32 @@
 {
-  "database": {
-    "rules": "database.rules.json"
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "frameworksBackend": {
+      "region": "us-east1"
+    }
   },
   "emulators": {
     "auth": {
       "port": 9099
     },
-    "database": {
-      "port": 9000
+    "firestore": {
+      "port": 8080
     },
     "hosting": {
-      "port": 5000
+      "port": 5002
     },
     "ui": {
       "enabled": true,
-      "port": 6001
+      "port": 8965
     },
     "singleProjectMode": true
   }
