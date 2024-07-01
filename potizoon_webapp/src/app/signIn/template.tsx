@@ -16,28 +16,6 @@ export const viewport: Viewport = {
 }
 
 function Template({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    async function handleSignInRedirect() {
-      const response = await getRedirectResult(auth);
-      console.log("Response", response);
-  
-      if (!response) {
-        signInWithGoogleRedirect();
-      } else {
-        const credential = GoogleAuthProvider.credentialFromResult(response);
-        const providerId = credential?.providerId;
-        const token = (credential as OAuthCredential).accessToken;
-        const user = response.user;
-
-        console.log("User", user);
-        console.log("Token", token);
-        console.log("Provider ID", providerId);
-        console.log("Credential", credential);
-            } 
-          }
-    handleSignInRedirect();
-  
-  }, []);
 
   function tellAppInventor(message: String | Object) {
     try {
@@ -47,6 +25,25 @@ function Template({ children }: { children: React.ReactNode }) {
       console.log("App Inventor Communication Error", e);
     }
   }
+
+  useEffect(() => {
+    async function handleSignInRedirect() {
+      const response = await getRedirectResult(auth);
+      console.log("Response", response);
+  
+      if (!response) {
+        signInWithGoogleRedirect();
+      } else {
+        const userDocRef = await createUserDocumentFromAuth(response.user);
+        tellAppInventor(response.user);
+        }
+      } 
+          
+    handleSignInRedirect();
+  
+  }, []);
+
+  
 
   return (
     <div className="login-container">

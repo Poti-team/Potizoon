@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"
+import { ProviderId, getAuth } from "firebase/auth"
 import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, OAuthCredential } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -41,7 +41,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email, photoUrl } = userAuth;
+    const { displayName, email, photoUrl, ProviderId } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -50,6 +50,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         email,
         photoUrl,
         createdAt,
+        ProviderId,
       });
     } catch (error) {
       console.log('Error creating user', error.message);
