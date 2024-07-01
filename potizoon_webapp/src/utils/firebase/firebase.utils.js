@@ -3,8 +3,6 @@ import { getAuth } from "firebase/auth"
 import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, OAuthCredential } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyDYQpefxLwh79yaxZs11r6EeedO5lDPAoA",
     authDomain: "potizoon.web.app",
@@ -20,7 +18,7 @@ const env = process.env.NODE_ENV
   if (env == "development") {
       firebaseConfig.authDomain = "localhost:3000";
   } else if (env == "production") {
-     firebaseConfig.authDomain = "potizoon.firebaseapp.com";
+     firebaseConfig.authDomain = "potizoon.web.app";
   }
 
 // Initialize Firebase
