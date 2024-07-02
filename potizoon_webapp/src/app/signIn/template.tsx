@@ -8,6 +8,7 @@ import { signInWithGoogleRedirect, createUserDocumentFromAuth, auth } from '../.
 import { FirebaseError } from 'firebase/app';
 import Router from 'next/router';
 
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -17,25 +18,24 @@ export const viewport: Viewport = {
 
 function Template({ children }: { children: React.ReactNode }) {
 
-  function tellAppInventor(message: String | Object) {
-    try {
-      console.log("Sending message to App Inventor", message);
-      (window as any).AppInventor.setWebViewString(message);
-    } catch (e) {
-      console.log("App Inventor Communication Error", e);
-    }
-  }
+  // function tellAppInventor(message: String | Object) {
+  //   try {
+  //     console.log("Sending message to App Inventor", message);
+  //     (window as any).AppInventor.setWebViewString(message);
+  //   } catch (e) {
+  //     console.log("App Inventor Communication Error", e);
+  //   }
+  // }
 
   useEffect(() => {
     async function handleSignInRedirect() {
-      const response = await getRedirectResult(auth);
-      console.log("Response", response);
-  
+      const response = await getRedirectResult(auth);  
       if (!response) {
         signInWithGoogleRedirect();
       } else {
         const userDocRef = await createUserDocumentFromAuth(response.user);
-        tellAppInventor(response.user);
+        console.log("Email "+ response.user.email + "," + "Username "+ response.user.displayName + "," + "PhotoUrl "+ response.user.photoURL + "," + "ProviderID "+ response.user.providerData.map((provider) => provider.providerId)+ "," + "UserID "+ response.user.uid);
+        
         }
       } 
           

@@ -41,19 +41,19 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email, photoUrl, ProviderId } = userAuth;
+    const { displayName, email, photoURL, providerData,} = userAuth;
     const createdAt = new Date();
 
     try {
       await setDoc(userDocRef, {
         displayName,
         email,
-        photoUrl,
+        photoURL,
         createdAt,
-        ProviderId,
+        providerData: providerData.map((provider) => provider.providerId), 
       });
     } catch (error) {
-      console.log('Error creating user', error.message);
+      console.log('Error creating user', error.message, error.code, error.stack);
       console.error('Error creating user', error.message);
     }
   }
