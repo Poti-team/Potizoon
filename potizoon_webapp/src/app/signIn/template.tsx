@@ -22,7 +22,7 @@ function Template({ children }: { children: React.ReactNode }) {
   //   try {
   //     console.log("Sending message to App Inventor", message);
   //     (window as any).AppInventor.setWebViewString(message);
-  //   } catch (e) {
+  //   } catch (e) {kugigbikhjkl
   //     console.log("App Inventor Communication Error", e);
   //   }
   // }
