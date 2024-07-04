@@ -1,12 +1,27 @@
-'use client'
+'use client';
+import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
-import dynamic from 'next/dynamic'
-import geoJsonData from '../components/map/brasil.json' // Corrected import for JSON data
+const MapWithNoSSR = dynamic(() => import('../components/map'), { ssr: false });
+const SearchInputWithNoSSR = dynamic(() => import('../components/searchinput'), { ssr: false });
 
-const Map = dynamic(() => import('../components/map'), { ssr: false })
+function Page() {
+  const [userInput, setUserInput] = useState('');
 
-export default function Page() {
-    return (
-        <Map geoJsonData={geoJsonData} /> // Corrected prop passing
-    )
+  const handleInputChange = (input: string) => {
+    setUserInput(input);
+  };
+
+  return (
+    <div>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <SearchInputWithNoSSR onInputChange={handleInputChange} />
+      <MapWithNoSSR userInput={userInput} />
+    </div>
+  );
 }
+
+export default Page;
