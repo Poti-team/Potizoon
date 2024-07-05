@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON} from 'react-leaflet'
 import brasil from '../../data/brasil.json' 
 
+import 'leaflet/dist/leaflet.css';
+
 import styles from './map.module.css';
 
 // after figuring out which feature to load, do this (geoJsonData is a json file)
@@ -26,11 +28,11 @@ const Map = ({userInput}: {userInput: string}) => {
   };
 
   return(
-  <MapContainer center={position} zoom={5} style={{height: '100%'}}>
+  <MapContainer 
+  center={position} zoom={5} zoomControl={false}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
 
       {/*It's only loading a individual feature*/}
      {selectedFeature && <GeoJSON data={selectedFeature} style={styles}/>}
