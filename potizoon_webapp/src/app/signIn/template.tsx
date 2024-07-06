@@ -4,7 +4,7 @@ import type { Viewport } from 'next'
 import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, OAuthCredential } from 'firebase/auth';
 
 import React, { useEffect } from 'react';
-import { signInWithGoogleRedirect, createUserDocumentFromAuth, auth } from '../../utils/firebase/firebase.utils.js';
+import { signInWithGoogleRedirect, auth, createDocument } from '../../utils/firebase/firebase.utils.js';
 import { FirebaseError } from 'firebase/app';
 import Router from 'next/router';
 
@@ -33,7 +33,24 @@ function Template({ children }: { children: React.ReactNode }) {
       if (!response) {
         signInWithGoogleRedirect();
       } else {
-        const userDocRef = await createUserDocumentFromAuth(response.user);
+        const userData = {
+          createdAt: new Date(),
+          email: response.user.email,
+          username: response.user.displayName,
+          photoUrl: response.user.photoURL,
+          providerId: response.user.providerData.map((provider) => provider.providerId),
+          userId: response.user.uid,
+          mapSearchHistory: [],
+          userScore: 0,
+        };
+        try {
+          await createDocument(response.user.uid, 'users', userData);
+        } catch (error) {
+          const errorCode = (error as FirebaseError).code;
+          const errorMessage = (error as FirebaseError).message;
+          console.error(`Error creating user document: ${errorCode} - ${errorMessage}`);
+        }
+
         console.log("Email "+ response.user.email + "," + "Username "+ response.user.displayName + "," + "PhotoUrl "+ response.user.photoURL + "," + "ProviderID "+ response.user.providerData.map((provider) => provider.providerId)+ "," + "UserID "+ response.user.uid);
         
         }
