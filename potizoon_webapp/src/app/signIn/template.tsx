@@ -38,10 +38,11 @@ function Template({ children }: { children: React.ReactNode }) {
           email: response.user.email,
           username: response.user.displayName,
           photoUrl: response.user.photoURL,
-          providerId: response.user.providerData.map((provider) => provider.providerId),
-          userId: response.user.uid,
+          providerData: response.user.providerData.map((provider) => provider.providerId),
+          uid: response.user.uid,
           mapSearchHistory: [],
           userScore: 0,
+          roles: ['user']
         };
         try {
           await createDocument(response.user.uid, 'users', userData);

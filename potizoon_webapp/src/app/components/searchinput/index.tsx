@@ -5,7 +5,7 @@ import styles from './searchinput.module.css';
 
 import bussIcon from './buss.png';
 import arrowLeftIcon from './arrow-left.svg';
-import marker from './red_marker.png';
+import marker from './red_marker.svg';
 import pickOnMapIcon from './pick_on_map.svg';
 
 const SearchInput = ({ onInputChange }: { onInputChange: (value: string) => void }) => {
@@ -38,7 +38,9 @@ const SearchInput = ({ onInputChange }: { onInputChange: (value: string) => void
   return (
     
     <div className={`${styles['search-container']} ${isFocused ? styles['expanded'] : ''}`}>
-      <div className={styles['icone-bussola-container']} onClick={isOverlayVisible ? handleHideOverlay : undefined}>
+
+      <div className={`${styles['top-menu-search']} ${isFocused ? styles['expanded'] : ''}`}>
+      <div className={`${styles['icone-bussola-container']} ${isFocused ? styles['expanded'] : ''}`} onClick={isOverlayVisible ? handleHideOverlay : undefined}>
         <Image src={icon} alt="Ícone de bússola" />
       </div>
       <input
@@ -49,8 +51,9 @@ const SearchInput = ({ onInputChange }: { onInputChange: (value: string) => void
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleFocus}
-    
       />
+      </div>
+
       {isOverlayVisible && (
         <div className={styles['autocomplete-overlay']}>
 
@@ -59,20 +62,43 @@ const SearchInput = ({ onInputChange }: { onInputChange: (value: string) => void
             <span>Escolher no mapa</span>  
           </div>
 
-          <div className='map_search_history'>
-            <div id={styles['recentes']}>
-              <span>Recentes</span>
-            </div>
+          <div className={styles['map_search_options']}>
 
-            <div className={styles['searchItem']}>
-              <Image src={marker} alt="Ícone de marcador" className={styles['imagem']}/>
-              <span>Natal, RN</span>
-            </div>
+            <div className={styles['map_search_history']}>
+              <div id={styles['recentes']}>
+                <span>Recentes</span>
+              </div>
 
-            <div className={styles['searchItem']}>
-              <Image src={marker} alt="Ícone de marcador" className={styles['imagem']}/>
-              <span>São José dos Campos, SP</span>
+              <div className={styles['searchItem']}>
+                <Image src={marker} alt="Ícone de marcador" className={styles['marker-icon']}/>
+                <div className={styles['searchItemTextContainer']}>
+                  <span className={styles['cidade']}>Natal</span>
+                  <span className={styles['estado']}>RN</span>
+                </div>
+                
+              </div>
+
+              <div className={styles['searchItem']}>
+                <Image src={marker} alt="Ícone de marcador" className={styles['marker-icon']}/>
+                <div className={styles['searchItemTextContainer']}>
+                  <span className={styles['cidade']}>São José dos Campos</span>
+                  <span className={styles['estado']}>SP</span>
+                </div>
+              </div>
+
+              <div className={styles['searchItem']}>
+                <Image src={marker} alt="Ícone de marcador" className={styles['marker-icon']}/>
+                <div className={styles['searchItemTextContainer']}>
+                  <span className={styles['estado']}>Ceará</span>
+                </div>
+              </div>
+
+            </div>          
+
+            <div id={styles['map_search_suges']}>
+
             </div>
+            
           </div>
 
         </div>

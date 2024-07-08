@@ -11,12 +11,20 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
+.top-menu-search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    z-index: 1001;
+}
+
 .search-container input {
     font-family: 'Montserrat', sans-serif;
     border: none;
     margin-left: 2vw;
     width: 100%;
     border-radius: inherit;
+    font-size: 0.7em;
 }
 
 .icone-bussola-container { 
@@ -26,7 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
 
 .autocomplete-overlay {
@@ -37,7 +45,7 @@
     height: 100vh;
     background-color: #EDEDED;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 900; /* Ensure it's above other content */
     /* Add more styling as needed */
   }
 
@@ -47,34 +55,69 @@
     align-items: center;
 }
 
-.imagem, #recentes span{
-    margin: 1em;
+.searchItemTextContainer span {
+    display: block;
 }
 
+
+.searchItemTextContainer span:nth-child(2) {
+   font-size: 0.4em;
+}
+
+.estado {
+    color: #000;
+}
+
+.imagem, .marker-icon, #recentes span{
+    margin: 0.9em;
+}
+
+.marker-icon {
+    width: 1em;
+    height: 1em;
+}
 
 #recentes {
     font-size: 0.8em;
     background-color: #c5c5c5;
+    display: flex;
+    align-items: center;
+}
+
+#recentes span {
+    color: black;
+    margin: 0.5em 1.9em;
 }
 
 .hide-overlay-button {
     position: absolute;
     top: 0;
-    right: 0; /* Adjust based on your design */
+    right: 0; 
     cursor: pointer;
-    /* Add more styling as needed */
 }
 
 .search-container.expanded {
+    z-index: 1010;
     top: 0;
     width: 100%;
-}
-
-.search-container.expanded > div {
-    box-shadow: none;
     border-radius: 0%;
+    box-shadow: 0 8px 4px -4px rgb(0, 0, 0, 1);
+
 }
 
-.search-container.expanded input {
-    border-radius: 0;
+.icone-bussola-container.expanded {
+    border-radius: 0%;
+    box-shadow: none;
+}
+
+.search-container.expanded input:focus {
+  outline: none;
+}
+
+.top-menu-search.expanded {
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,0.4);
+}
+
+.map_search_history .searchItem:not(:last-child) {
+   border-bottom: 2px solid #D9D9D9;
 }
