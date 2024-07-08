@@ -1,5 +1,8 @@
+'use client'
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
+
+import { getUserMapSearchHistory } from '@/utils/firebase/firebase.utils';
 
 import styles from './searchinput.module.css';
 
@@ -8,7 +11,11 @@ import arrowLeftIcon from './arrow-left.svg';
 import marker from './red_marker.svg';
 import pickOnMapIcon from './pick_on_map.svg';
 
-const SearchInput = ({ onInputChange }: { onInputChange: (value: string) => void }) => {
+
+
+const SearchInput = ({ onInputChange, uid }: { onInputChange: (value: string) => void; uid?: string }) => {
+  const MapSearchHistory = getUserMapSearchHistory(uid);
+
   const [inputValue, setInputValue] = useState('');
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false); // State to manage focus
@@ -33,6 +40,7 @@ const SearchInput = ({ onInputChange }: { onInputChange: (value: string) => void
     setIsFocused(false); // Update focus state
   };
 
+  
 
 
   return (

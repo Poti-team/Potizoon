@@ -48,5 +48,13 @@ export const createDocument = async (document_name, collection, document_data) =
     }
   }
   return userDocRef; 
+}
 
+export const getUserMapSearchHistory = async (user_id) => {
+  const docRef = doc(db, 'users', user_id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data().map_search_history;
+  }
+  return null;
 }
