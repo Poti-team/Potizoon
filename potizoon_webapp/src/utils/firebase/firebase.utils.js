@@ -50,6 +50,19 @@ export const createDocument = async (document_name, collection, document_data) =
   return userDocRef; 
 }
 
+export const updateUserMapSearchHistory = async (user_id, map_search_history) => {
+  const docRef = doc(db, 'users', user_id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    try {
+      await setDoc(docRef, {map_search_history: map_search_history}, {merge: true});
+    } catch (error) {
+      console.log('Error updating user map search history', error.message, error.code, error.stack);
+      console.error('Error updating user map search history', error.message);
+    }
+  }
+}
+
 export const getUserMapSearchHistory = async (user_id) => {
   const docRef = doc(db, 'users', user_id);
   const docSnap = await getDoc(docRef);

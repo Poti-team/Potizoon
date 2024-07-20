@@ -4,7 +4,7 @@ import type { Viewport } from 'next'
 import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, OAuthCredential } from 'firebase/auth';
 
 import React, { useEffect } from 'react';
-import { signInWithGoogleRedirect, auth, createDocument } from '../../utils/firebase/firebase.utils.js';
+import { signInWithGoogleRedirect, auth, createDocument } from '../../utils/firebase/firebase.utils';
 import { FirebaseError } from 'firebase/app';
 import Router from 'next/router';
 

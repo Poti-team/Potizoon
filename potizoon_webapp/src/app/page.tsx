@@ -2,6 +2,8 @@
 
 import Head from "next/head";
 
+
+
 export default function Home() {
   return (
     <div>
@@ -12,6 +14,8 @@ export default function Home() {
       
       <main>
         <p>Página "home" desse nextjs</p>
+
+      
       </main>
     </div>
   );
